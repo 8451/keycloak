@@ -89,6 +89,15 @@ public interface IdentityStore {
     void validatePassword(LDAPObject user, String password) throws AuthenticationException;
 
     /**
+     * Validates the specified credentials against an LDAPv3 server that uses a SASL mechanism
+     * @param user
+     * @param password
+     * @param sasl
+     * @throws AuthenticationException if authentication is not successful
+     */
+    void validatePassword(LDAPObject user, String password, String sasl) throws AuthenticationException;
+
+    /**
      * Updates the specified credential value.
      *
      * @param user Keycloak user

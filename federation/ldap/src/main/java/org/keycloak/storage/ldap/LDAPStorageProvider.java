@@ -577,6 +577,7 @@ public class LDAPStorageProvider implements UserStorageProvider,
 
     }
 
+    // TODO: Support authenticating with SASL
     public boolean validPassword(RealmModel realm, UserModel user, String password) {
         if (kerberosConfig.isAllowKerberosAuthentication() && kerberosConfig.isUseKerberosForPasswordAuthentication()) {
             // Use Kerberos JAAS (Krb5LoginModule)

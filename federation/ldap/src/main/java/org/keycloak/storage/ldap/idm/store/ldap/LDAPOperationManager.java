@@ -528,6 +528,20 @@ public class LDAPOperationManager {
         }
     }
 
+    /**
+     * <p>
+     * Performs a SASL authentication using the given DN, password, and SASL mechanism to bind to the authentication
+     * context.
+     * </p>
+     * @param dn
+     * @param password
+     * @param sasl
+     * @throws AuthenticationException if authentication is not successful
+     */
+    public void authenticate(String dn, String password, String sasl) throws AuthenticationException {
+        // TODO: implement authentication with SASL
+    }
+
     public void modifyAttributes(final String dn, final ModificationItem[] mods, LDAPOperationDecorator decorator) {
         try {
             if (logger.isTraceEnabled()) {
