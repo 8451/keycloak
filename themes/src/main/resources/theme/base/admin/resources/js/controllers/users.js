@@ -1235,7 +1235,13 @@ module.controller('LDAPUserStorageCtrl', function($scope, $location, Notificatio
 
     $scope.authTypes = [
         { "id": "none", "name": "none" },
-        { "id": "simple", "name": "simple" }
+        { "id": "simple", "name": "simple" },
+        { "id": "SASL", "name": "SASL"}
+    ];
+
+    $scope.saslMechanisms = [
+        { "id": "DIGEST-MD5", "name": "DIGEST-MD5"},
+        { "id": "CRAM-MD5", "name": "CRAM-MD5"}
     ];
 
     $scope.searchScopes = [
