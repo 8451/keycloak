@@ -922,6 +922,8 @@ public class RealmAdminResource {
      * @param connectionUrl
      * @param bindDn
      * @param bindCredential
+     * @param saslMechanism
+     * @param saslRealm
      * @return
      */
     @Path("testLDAPConnection")
@@ -929,6 +931,7 @@ public class RealmAdminResource {
     @NoCache
     public Response testLDAPConnection(@FormParam("action") String action, @FormParam("connectionUrl") String connectionUrl,
                                        @FormParam("bindDn") String bindDn, @FormParam("bindCredential") String bindCredential,
+                                       @FormParam("saslMechanism") String saslMechanism, @FormParam("saslRealm") String saslRealm,
                                        @FormParam("useTruststoreSpi") String useTruststoreSpi, @FormParam("connectionTimeout") String connectionTimeout,
                                        @FormParam("componentId") String componentId) {
         auth.realm().requireManageRealm();
@@ -937,7 +940,9 @@ public class RealmAdminResource {
             bindCredential = realm.getComponent(componentId).getConfig().getFirst(LDAPConstants.BIND_CREDENTIAL);
         }
 
-        boolean result = new LDAPConnectionTestManager().testLDAP(action, connectionUrl, bindDn, bindCredential, useTruststoreSpi, connectionTimeout);
+        logger.info(String.format("SASL Realm: %s", saslRealm));
+
+        boolean result = new LDAPConnectionTestManager().testLDAP(action, connectionUrl, bindDn, bindCredential, saslMechanism, saslRealm, useTruststoreSpi, connectionTimeout);
         return result ? Response.noContent().build() : ErrorResponse.error("LDAP test error", Response.Status.BAD_REQUEST);
     }
 

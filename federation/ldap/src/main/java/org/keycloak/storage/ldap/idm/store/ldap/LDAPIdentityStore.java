@@ -242,6 +242,7 @@ public class LDAPIdentityStore implements IdentityStore {
     @Override
     public void validatePassword(LDAPObject user, String password, String sasl) throws AuthenticationException {
         // TODO: Support authenticate with SASL
+        logger.debug(String.format("Validate password with SASL: %s", sasl));
     }
 
     @Override

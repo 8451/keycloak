@@ -211,6 +211,7 @@ public interface RealmResource {
     @NoCache
     Response testLDAPConnection(@FormParam("action") String action, @FormParam("connectionUrl") String connectionUrl,
                                 @FormParam("bindDn") String bindDn, @FormParam("bindCredential") String bindCredential,
+                                @FormParam("saslMechanism") String saslMechanism, @FormParam("saslRealm") String saslRealm,
                                 @FormParam("useTruststoreSpi") String useTruststoreSpi, @FormParam("connectionTimeout") String connectionTimeout);
 
     @Path("testSMTPConnection/{config}")

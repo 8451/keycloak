@@ -35,7 +35,7 @@ public class LDAPConnectionTestManager {
     public static final String TEST_CONNECTION = "testConnection";
     public static final String TEST_AUTHENTICATION = "testAuthentication";
 
-    public boolean testLDAP(String action, String connectionUrl, String bindDn, String bindCredential, String useTruststoreSpi, String connectionTimeout) {
+    public boolean testLDAP(String action, String connectionUrl, String bindDn, String bindCredential, String saslMechanism, String saslRealm, String useTruststoreSpi, String connectionTimeout) {
         if (!TEST_CONNECTION.equals(action) && !TEST_AUTHENTICATION.equals(action)) {
             ServicesLogger.LOGGER.unknownAction(action);
             return false;
@@ -53,8 +53,15 @@ public class LDAPConnectionTestManager {
             env.put(Context.PROVIDER_URL, connectionUrl);
 
             if (TEST_AUTHENTICATION.equals(action)) {
-                env.put(Context.SECURITY_AUTHENTICATION, "simple");
+                if (saslMechanism != null && !saslMechanism.trim().isEmpty()) {
+                    env.put(Context.SECURITY_AUTHENTICATION, saslMechanism);
 
+                    if(saslRealm != null && !saslRealm.trim().isEmpty()) {
+                        env.put("java.naming.security.sasl.realm", saslRealm);
+                    }
+                } else {
+                    env.put(Context.SECURITY_AUTHENTICATION, "simple");
+                }
                 if (bindDn == null) {
                     logger.error("Unknown bind DN");
                     return false;

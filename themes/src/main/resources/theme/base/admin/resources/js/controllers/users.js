@@ -1510,7 +1510,8 @@ module.controller('LDAPUserStorageCtrl', function($scope, $location, Notificatio
         });
     };
     var initConnectionTest = function(testAction, ldapConfig) {
-        return {
+
+        var connectionTest = {
             action: testAction,
             realm: $scope.realm.realm,
             connectionUrl: ldapConfig.connectionUrl,
@@ -1520,6 +1521,15 @@ module.controller('LDAPUserStorageCtrl', function($scope, $location, Notificatio
             connectionTimeout: ldapConfig.connectionTimeout,
             componentId: instance.id
         };
+
+        if(ldapConfig.authType[0] === 'SASL') {
+            connectionTest.saslMechanism = ldapConfig.saslMechanism[0];
+            if(ldapConfig.saslMechanism[0] === 'DIGEST-MD5') {
+                connectionTest.saslRealm = ldapConfig.saslRealm[0];
+            }
+        }
+
+        return connectionTest;
     };
 
     $scope.testConnection = function() {

@@ -59,6 +59,16 @@ public class LDAPConfig {
         }
     }
 
+    public String getSASLMechanism() {
+        String value = config.getFirst(LDAPConstants.SASL_MECHANISM);
+        return value;
+    }
+
+    public String getSASLRealm() {
+        String value = config.getFirst(LDAPConstants.SASL_MECHANISM_REALM);
+        return value;
+    }
+
     public String getUseTruststoreSpi() {
         return config.getFirst(LDAPConstants.USE_TRUSTSTORE_SPI);
     }

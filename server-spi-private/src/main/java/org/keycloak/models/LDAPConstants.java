@@ -54,6 +54,7 @@ public class LDAPConstants {
     public static final String SASL_MECHANISM = "saslMechanism";
     public static final String SASL_MECHANISM_CRAM = "CRAM-MD5";
     public static final String SASL_MECHANISM_DIGEST = "DIGEST-MD5";
+    public static final String SASL_MECHANISM_REALM = "saslRealm";
 
     public static final String USE_TRUSTSTORE_SPI = "useTruststoreSpi";
     public static final String USE_TRUSTSTORE_ALWAYS = "always";

@@ -540,6 +540,7 @@ public class LDAPOperationManager {
      */
     public void authenticate(String dn, String password, String sasl) throws AuthenticationException {
         // TODO: implement authentication with SASL
+        logger.debug(String.format("Calling authenticate with SASL: %s", sasl));
     }
 
     public void modifyAttributes(final String dn, final ModificationItem[] mods, LDAPOperationDecorator decorator) {
@@ -685,6 +686,13 @@ public class LDAPOperationManager {
         if (!LDAPConstants.AUTH_TYPE_NONE.equals(authType)) {
             env.put(Context.SECURITY_PRINCIPAL, bindDN);
             env.put(Context.SECURITY_CREDENTIALS, bindCredential);
+        }
+
+        if (LDAPConstants.AUTH_TYPE_SASL.equals(authType)) {
+            env.put(Context.SECURITY_AUTHENTICATION, this.config.getSASLMechanism());
+            if (LDAPConstants.SASL_MECHANISM_DIGEST.equals(this.config.getSASLMechanism())) {
+                env.put("java.naming.security.sasl.realm", this.config.getSASLRealm());
+            }
         }
 
         String url = this.config.getConnectionUrl();
