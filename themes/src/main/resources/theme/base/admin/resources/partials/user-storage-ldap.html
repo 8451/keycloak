@@ -160,10 +160,12 @@
                 </div>
                 <kc-tooltip>{{:: 'ldap.sasl-mechanism.tooltip' | translate}}</kc-tooltip>
             </div>
-            <div class="form-group clearfix" data-ng-hide="instance.config['authType'][0] != 'SASL'">
+            <div class="form-group clearfix"
+                 data-ng-hide="instance.config['authType'][0] != 'SASL' || instance.config['saslMechanism'][0] != 'DIGEST-MD5'">
                 <label class="col-md-2 control-label" for="saslRealm"><span class="required">*</span> {{:: 'sasl-realm' | translate}}</label>
                 <div class="col-md-6">
-                    <input class="form-control" id="saslRealm" type="text" ng-model="instance.config['saslRealm'][0]" placeholder="{{:: 'ldap-sasl-realm' | translate}}" data-ng-required="instance.config['authType'][0] != 'none'">
+                    <input class="form-control" id="saslRealm" type="text" ng-model="instance.config['saslRealm'][0]" placeholder="{{:: 'ldap-sasl-realm' | translate}}"
+                           data-ng-required="instance.config['authType'][0] == 'SASL' && instance.config['saslMechanism'][0] == 'DIGEST-MD5'">
                 </div>
                 <kc-tooltip>{{:: 'ldap.sasl-realm.tooltip' | translate}}</kc-tooltip>
             </div>
